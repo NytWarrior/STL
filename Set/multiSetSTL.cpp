@@ -10,6 +10,13 @@ using namespace std;
 
 typedef multiset<int>::iterator It;
 
+class cmp{
+    public:
+    bool operator()(pair<string, int> p1, pair<string, int> p2){
+        return p1.second<p2.second;
+    }
+};
+
 int main() {
 
     int arr[] = {10, 20, 30, 20, 10,20,20, 10, 10, 30, 80};
@@ -51,6 +58,44 @@ int main() {
         cout<<*it<<" ";
     }
     cout<<endl;
+    
+    pair<string, int> p1 = make_pair("B", 100);
+    pair<string, int> p2 = make_pair("A", 40);
+    pair<string, int> p3 = make_pair("C", 120);
+    pair<string, int> p4 = make_pair("D", 10);
+
+
+    multiset<pair<string, int>> mp1;
+    mp1.insert(p1);
+    mp1.insert(p2);
+    mp1.insert(p3);
+    mp1.insert(p4);
+
+    for(auto p: mp1){                   
+        cout<<p.first<<" -> "<<p.second<<endl;
+    }
+    //A -> 40
+    //B -> 100
+    //C -> 120
+    //D -> 10
+    
+
+    cout<<endl;
+    multiset<pair<string, int>, cmp> mp2;
+    mp2.insert(p1);
+    mp2.insert(p2);
+    mp2.insert(p3);
+    mp2.insert(p4);
+
+
+    for(auto p: mp2){
+        cout<<p.first<<" -> "<<p.second<<endl;
+    }
+    
+    //D -> 10
+    //A -> 40
+    //B -> 100
+    //C -> 120
     
     return 0;
 }
